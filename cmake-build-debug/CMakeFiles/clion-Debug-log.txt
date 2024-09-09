@@ -1,0 +1,13 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/jeongjihyo/Documents/AnA_sunrin_festivities -B /Users/jeongjihyo/Documents/AnA_sunrin_festivities/cmake-build-debug
+-- Configuring done (0.1s)
+CMake Error at CMakeLists.txt:11 (add_executable):
+  Cannot find source file:
+
+    ../../../../shaders_basic_lighting.c
+
+
+CMake Error at CMakeLists.txt:11 (add_executable):
+  No SOURCES given to target: AnA_sunrin_festivities
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
