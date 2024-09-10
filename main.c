@@ -3,7 +3,8 @@
 
 // 함수 원형
 void DrawMachine();  // 슬롯머신 그리는 함수
-void DrawCly();
+void DrawCly();    // 슬롯 원통 그리는 함수
+void DrawBtn();    //슬롯 버튼 그리는 함수
 
 // 색상 설정
 Color machine = {55, 35, 46, 255};
@@ -77,15 +78,13 @@ void DrawMachine() {
     rlPopMatrix();
 
     DrawCly();
-
-
     // 선반 그리기 (기울임 없이)
     DrawCube((Vector3){ 0.0f, -0.5f, 3.77f }, 5.0f, 2.0f, 2.5f, machine);
     DrawCubeWires((Vector3){ 0.0f, -0.5f, 3.77f }, 5.0f, 2.0f, 2.5f, BLACK);
-
     // 뚜껑
     DrawCube((Vector3){ 0.0f, 5.5f, 1.77f }, 5.0f, 0.5f, 1.5f, machine);
     DrawCubeWires((Vector3){ 0.0f, 5.5f, 1.77f }, 5.0f, 0.5f, 1.5f, BLACK);
+    DrawBtn();
 }
 
 void DrawCly(){
@@ -100,9 +99,12 @@ void DrawCly(){
 // 원통 그리기 (회전 및 평행 이동 적용 후)
     DrawCylinder((Vector3){ -0.5f, -0.15f, 0.0f }, 2.0f, 2.0f, 1.3f, 60, RAYWHITE);
     DrawCylinderWires((Vector3){ -0.5f, -0.15f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
+    DrawCylinder((Vector3){ -0.5f, -0.15f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
     DrawCylinder((Vector3){ -0.5f, 1.35f, 0.0f }, 2.0f, 2.0f, 1.3f, 60, RAYWHITE);
     DrawCylinderWires((Vector3){ -0.5f, 1.35f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
+    DrawCylinder((Vector3){ -0.5f, 1.35f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
     DrawCylinder((Vector3){ -0.5f, 2.85f, 0.0f }, 2.0f, 2.0f, 1.3f, 60, RAYWHITE);
+    DrawCylinder((Vector3){ -0.5f, 2.85f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
     DrawCylinderWires((Vector3){ -0.5f, 2.85f, 0.0f}, 2.0f, 2.0f, 1.3f, 20, BLACK);
 
 
@@ -111,4 +113,19 @@ void DrawCly(){
     //DrawCylinderWires((Vector3){ 0.0f, 0.0f, 0.0f }, 0.5f, 0.5f, 10.0f, 60, BLACK);
 
     rlPopMatrix();
+}
+
+void DrawBtn(){
+    //버튼
+    DrawCube((Vector3){1.5f,0.2f,4.0f},1.5f,1.0f, 1.0f,YELLOW);
+    DrawCubeWires((Vector3){1.5f,0.2f,4.0f},1.5f,1.0f, 1.0f,BLACK);
+
+    //동그라라미
+    DrawSphere((Vector3){0.3f,0.5f,4.2f}, 0.2f, DARKGREEN);
+    DrawSphereWires((Vector3){0.3f,0.5f,4.2f}, 0.2f,1, 100,BLACK);
+    DrawSphere((Vector3){0.1f,0.5f,3.7f}, 0.2f, DARKBLUE);
+    DrawSphereWires((Vector3){0.1f,0.5f,3.7f}, 0.2f,1, 100,BLACK);
+    DrawSphere((Vector3){0.5f,0.5f,3.7f}, 0.2f, DARKPURPLE);
+    DrawSphereWires((Vector3){0.5f,0.5f,3.7f}, 0.2f,1, 100,BLACK);
+
 }
