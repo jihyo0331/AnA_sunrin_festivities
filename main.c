@@ -9,15 +9,20 @@ void DrawCly();    // 슬롯 원통 그리는 함수
 void DrawBtn();    //슬롯 버튼 그리는 함수
 
 //전역변수
+int frameCounter = 0;  // 프레임 카운터
 
 //버튼 클릭 여부
 int isClickbtn = 0;
+
 
 //슬롯머신 애니메이션
 int isRotate = 0;      //슬롯 회전 여부
 int clyAngle1 = 0;
 int clyAngle2 = 0;
 int clyAngle3 = 0;
+Texture2D A_frame[60];
+
+
 
 
 // 색상 설정
@@ -25,6 +30,12 @@ Color machine = {55, 35, 46, 255};
 Color machine_center = {45,18,33,255};
 
 int main(void) {
+    for (int i = 0; i < 60; i++) {
+        char fileName[70];  // 파일명 버퍼
+        sprintf(fileName, "img/A/A_frame%d.png", i);
+        A_frame[i] = LoadTexture(fileName);  // 해당 파일을 텍스처로 로드
+    }
+    Texture2D frame = LoadTexture("A_frame0.png");
     // 창 크기 설정
     const int screenWidth = 800;
     const int screenHeight = 400;
@@ -32,7 +43,7 @@ int main(void) {
     InitWindow(screenWidth, screenHeight, "2024 AnA 선린제 슬롯머신");
 
     // 전체화면 모드로 전환
-    //SetWindowState(FLAG_FULLSCREEN_MODE);
+    SetWindowState(FLAG_FULLSCREEN_MODE);
 
     // 카메라 설정
     Camera camera = { 0 };
@@ -50,6 +61,8 @@ int main(void) {
     // 게임 루프
     while (!WindowShouldClose())    // ESC 키 또는 창 닫기 버튼이 눌리면 종료
     {
+        frameCounter++;
+        if (frameCounter >= 60) frameCounter = 0;
         // 카메라 업데이트 (자유로운 카메라 모드)
         //UpdateCamera(&camera, CAMERA_FREE);
 
@@ -63,6 +76,7 @@ int main(void) {
         DrawMachine();        // 슬롯머신 그리기
 
         EndMode3D();  // 3D 모드 비활성화
+        DrawTexture(frame, 0, 0, WHITE);  // 60개의 프레임 중 현재 프레임을 그리기
 
         DrawText("Use W/A/S/D and mouse to move the camera", 10, 10, 20, DARKGRAY);
         DrawText("Press ESC to exit", 10, 30, 20, DARKGRAY);
@@ -70,6 +84,9 @@ int main(void) {
         EndDrawing();
     }
 
+    for (int i = 0; i < 60; i++) {
+        UnloadTexture(A_frame[i]);
+    }
     CloseWindow();  // 창 닫기
 
     return 0;
