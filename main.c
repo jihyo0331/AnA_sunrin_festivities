@@ -1,3 +1,5 @@
+#include <stdbool.h>
+#include <stdio.h>
 #include "raylib.h"
 #include "rlgl.h"  // rlPushMatrix, rlPopMatrix 사용을 위해 필요
 
@@ -5,6 +7,18 @@
 void DrawMachine();  // 슬롯머신 그리는 함수
 void DrawCly();    // 슬롯 원통 그리는 함수
 void DrawBtn();    //슬롯 버튼 그리는 함수
+
+//전역변수
+
+//버튼 클릭 여부
+int isClickbtn = 0;
+
+//슬롯머신 애니메이션
+int isRotate = 0;      //슬롯 회전 여부
+int clyAngle1 = 0;
+int clyAngle2 = 0;
+int clyAngle3 = 0;
+
 
 // 색상 설정
 Color machine = {55, 35, 46, 255};
@@ -18,7 +32,7 @@ int main(void) {
     InitWindow(screenWidth, screenHeight, "2024 AnA 선린제 슬롯머신");
 
     // 전체화면 모드로 전환
-    SetWindowState(FLAG_FULLSCREEN_MODE);
+    //SetWindowState(FLAG_FULLSCREEN_MODE);
 
     // 카메라 설정
     Camera camera = { 0 };
@@ -98,14 +112,14 @@ void DrawCly(){
 
 // 원통 그리기 (회전 및 평행 이동 적용 후)
     DrawCylinder((Vector3){ -0.5f, -0.15f, 0.0f }, 2.0f, 2.0f, 1.3f, 60, RAYWHITE);
-    DrawCylinderWires((Vector3){ -0.5f, -0.15f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
+    //DrawCylinderWires((Vector3){ -0.5f, -0.15f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
     DrawCylinder((Vector3){ -0.5f, -0.15f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
     DrawCylinder((Vector3){ -0.5f, 1.35f, 0.0f }, 2.0f, 2.0f, 1.3f, 60, RAYWHITE);
-    DrawCylinderWires((Vector3){ -0.5f, 1.35f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
+    //DrawCylinderWires((Vector3){ -0.5f, 1.35f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
     DrawCylinder((Vector3){ -0.5f, 1.35f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
     DrawCylinder((Vector3){ -0.5f, 2.85f, 0.0f }, 2.0f, 2.0f, 1.3f, 60, RAYWHITE);
     DrawCylinder((Vector3){ -0.5f, 2.85f, 0.0f }, 2.0f, 2.0f, 1.3f, 20, BLACK);
-    DrawCylinderWires((Vector3){ -0.5f, 2.85f, 0.0f}, 2.0f, 2.0f, 1.3f, 20, BLACK);
+    //DrawCylinderWires((Vector3){ -0.5f, 2.85f, 0.0f}, 2.0f, 2.0f, 1.3f, 20, BLACK);
 
 
 
@@ -116,6 +130,7 @@ void DrawCly(){
 }
 
 void DrawBtn(){
+
     //버튼
     DrawCube((Vector3){1.5f,0.2f,4.0f},1.5f,1.0f, 1.0f,YELLOW);
     DrawCubeWires((Vector3){1.5f,0.2f,4.0f},1.5f,1.0f, 1.0f,BLACK);
