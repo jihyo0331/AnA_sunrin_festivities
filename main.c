@@ -2,26 +2,32 @@
 #include <stdio.h>
 #include "raylib.h"
 #include "rlgl.h"  // rlPushMatrix, rlPopMatrix 사용을 위해 필요
+#include <stdlib.h> // rand(), srand()를 사용하기 위해 필요
+#include <time.h>   // 시간 기반으로 난수를 초기화하기 위해 필요
 
 // 함수 원형
 void DrawMachine();  // 슬롯머신 그리는 함수
 void DrawCly();    // 슬롯 원통 그리는 함수
 void DrawBtn();    //슬롯 버튼 그리는 함수
+void DrawChar(int a);
 
 //전역변수
 int frameCounter = 0;  // 프레임 카운터
+int count = 0;
 
-char solot_A[24] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','X','T','U','V','W','G'};
+char slot_A[24] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','X','T','U','V','W','Z'};
+char* slot_Ap = slot_A;
+char slot_n[24] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','x','t','u','v','w','z'};
 
 //버튼 클릭 여부
 int isClickbtn = 0;
+int isSpace = 0;
+bool spacePressed = false; // 스페이스 키가 눌렸는지 확인
+double spacePressTime = 0.0; // 스페이스 키를 누른 시간을 기록
+
 
 
 //슬롯머신 애니메이션
-int isRotate = 0;      //슬롯 회전 여부
-int clyAngle1 = 0;
-int clyAngle2 = 0;
-int clyAngle3 = 0;
 Texture2D A_frame[60];
 
 
@@ -30,18 +36,20 @@ Texture2D A_frame[60];
 // 색상 설정
 Color machine = {55, 35, 46, 255};
 Color machine_center = {45,18,33,255};
+Color AnA = {186,56,56,255};
 
 int main(void) {
-    for (int i = 0; i < 60; i++) {
-        char fileName[70];  // 파일명 버퍼
-        sprintf(fileName, "img/A/A_frame%d.png", i);
-        A_frame[i] = LoadTexture(fileName);  // 해당 파일을 텍스처로 로드
-    }
-    Image image = LoadImage("img/A/A_frame0.png");     // Loaded in CPU memory (RAM)
-    Texture2D texture = LoadTextureFromImage(image);          // Image converted to texture, GPU memory (VRAM)
-    UnloadImage(image);   // Once image has been converted to texture and uploaded to VRAM, it can be unloaded from RAM
+    srand(time(NULL)); // 난수 초기화, 프로그램 시작 시 한 번 호출
+//    for (int i = 0; i < 60; i++) {
+//        char fileName[70];  // 파일명 버퍼
+//        sprintf(fileName, "img/A/A_frame%d.png", i);
+//        A_frame[i] = LoadTexture(fileName);  // 해당 파일을 텍스처로 로드
+//    }
+//    Image image = LoadImage("img/A/A_frame0.png");     // Loaded in CPU memory (RAM)
+//    Texture2D texture = LoadTextureFromImage(image);          // Image converted to texture, GPU memory (VRAM)
+//    UnloadImage(image);   // Once image has been converted to texture and uploaded to VRAM, it can be unloaded from RAM
 
-    Texture2D frame = LoadTexture("img/A/A_frame0.png");
+//    Texture2D frame = LoadTexture("img/A/A_frame0.png");
     // 창 크기 설정
     const int screenWidth = 800;
     const int screenHeight = 400;
@@ -49,7 +57,7 @@ int main(void) {
     InitWindow(screenWidth, screenHeight, "2024 AnA 선린제 슬롯머신");
 
     // 전체화면 모드로 전환
-    SetWindowState(FLAG_FULLSCREEN_MODE);
+    //SetWindowState(FLAG_FULLSCREEN_MODE);
 
     // 카메라 설정
     Camera camera = { 0 };
@@ -71,7 +79,20 @@ int main(void) {
         if (frameCounter >= 60) frameCounter = 0;
         // 카메라 업데이트 (자유로운 카메라 모드)
         //UpdateCamera(&camera, CAMERA_FREE);
+        // 현재 시간을 얻음
+        double currentTime = GetTime();
 
+        // 스페이스 키를 누르고 2초가 지났으면 다시 입력을 받을 수 있도록 함
+        if (spacePressed && (currentTime - spacePressTime) >= 2.0) {
+            spacePressed = false;
+        }
+
+        // 스페이스 키를 눌렀을 때, 이미 눌린 상태가 아니면 처리
+        if (!spacePressed && IsKeyPressed(KEY_SPACE)) {
+            isSpace++;  // 스페이스 카운트 증가
+            spacePressed = true;  // 스페이스 키가 눌렸음을 표시
+            spacePressTime = currentTime;  // 스페이스 키를 누른 시간을 기록
+        }
         viewPosition = camera.position;
 
         // 화면 그리기
@@ -80,19 +101,90 @@ int main(void) {
 
         BeginMode3D(camera);  // 3D 모드 활성화
         DrawMachine();        // 슬롯머신 그리기
-
         EndMode3D();  // 3D 모드 비활성화
+
         //DrawTexture(frame, 0, 0, WHITE);  // 60개의 프레임 중 현재 프레임을 그리기
-        DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
-        DrawText("Use W/A/S/D and mouse to move the camera", 10, 10, 20, DARKGRAY);
+        //DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);    //프레임 이미지 그리기
+        if(isSpace == 1){
+            static int j = 1; // 캐릭터 인덱스 초기화
+
+            // 프레임마다 j를 증가시킴
+            j++;
+
+            // 문자열의 끝에 도달하면 다시 처음으로 돌아감
+            if (j >= 22) {
+                j = 1;
+            }
+
+            // 같은 위치에 계속 출력해서 문자만 바뀌는 효과를 줌
+            DrawText(TextFormat("%c", slot_A[j-1]), 332, 95, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 332, 115, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j]), 330, 135, 40, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 332, 160, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 332, 180, 30, AnA);
+        }
+        if(isSpace > 1){
+            int randomNumber = rand() % 100 + 1;
+
+            // 1% 확률로 'A' 출력
+            if (randomNumber == 1 && count > 30) {
+                DrawText("A", 330, 135, 40, AnA);
+            }
+            else{
+                DrawText("B", 330, 135, 40, AnA);
+            }
+        }
+        if(isSpace == 2){
+            static int j = 1; // 캐릭터 인덱스 초기화
+
+            // 프레임마다 j를 증가시킴
+            j++;
+
+            // 문자열의 끝에 도달하면 다시 처음으로 돌아감
+            if (j >= 22) {
+                j = 1;
+            }
+
+            // 같은 위치에 계속 출력해서 문자만 바뀌는 효과를 줌
+            DrawText(TextFormat("%c", slot_A[j-1]), 390, 95, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 390, 115, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j]), 388, 135, 40, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 390, 160, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 390, 180, 30, AnA);
+        }
+        if(isSpace == 3){
+            static int j = 1; // 캐릭터 인덱스 초기화
+
+            // 프레임마다 j를 증가시킴
+            j++;
+
+            // 문자열의 끝에 도달하면 다시 처음으로 돌아감
+            if (j >= 22) {
+                j = 1;
+            }
+
+            // 같은 위치에 계속 출력해서 문자만 바뀌는 효과를 줌
+            DrawText(TextFormat("%c", slot_A[j-1]), 448, 95, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 448, 115, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j]), 446, 135, 40, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 448, 160, 30, AnA);
+            DrawText(TextFormat("%c", slot_A[j-1]), 448, 180, 30, AnA);
+        }
+        if(isSpace == 5){
+            isSpace = 0;
+            count += 1;
+        }
+
         DrawText("Press ESC to exit", 10, 30, 20, DARKGRAY);
+        //DrawText(solot_A[0],10,20,30,DARKGRAY);
+
 
         EndDrawing();
     }
 
-    for (int i = 0; i < 60; i++) {
-        UnloadTexture(A_frame[i]);
-    }
+//    for (int i = 0; i < 60; i++) {
+//        UnloadTexture(A_frame[i]);
+//    }
     CloseWindow();  // 창 닫기
 
     return 0;
@@ -165,5 +257,30 @@ void DrawBtn(){
     DrawSphereWires((Vector3){0.1f,0.5f,3.7f}, 0.2f,1, 100,BLACK);
     DrawSphere((Vector3){0.5f,0.5f,3.7f}, 0.2f, DARKPURPLE);
     DrawSphereWires((Vector3){0.5f,0.5f,3.7f}, 0.2f,1, 100,BLACK);
-
 }
+
+void DrawChar(int a) {
+    if (spacePressed) { // spacePressed가 true일 때만 작동
+        // 루프 시작, spacePressed가 true일 동안 계속 작동
+        while (spacePressed) {
+            static int j = 1; // 캐릭터 인덱스 초기화
+            // 프레임 카운터가 60에 도달하면 인덱스를 증가시킴
+            if (frameCounter == 60) {
+                j++;
+                frameCounter = 0; // 프레임 카운터 초기화
+            }
+
+            // 문자열의 끝에 도달하면 다시 처음으로 돌아감
+            if (j >= 24) {
+                j = 0;
+            }
+
+            // 문자열 출력 (현재 캐릭터)
+            if(a == 1){
+                DrawText(&slot_A[j], 10, 10, 20, AnA);
+            }
+        }
+    }
+}
+
+
