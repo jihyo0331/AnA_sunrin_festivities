@@ -11,6 +11,11 @@ void DrawCly();    // 슬롯 원통 그리는 함수
 void DrawBtn();    //슬롯 버튼 그리는 함수
 void DrawChar(int a);
 
+int ran(){
+    int randomNumber = rand() % 100 + 1;
+    return randomNumber;
+}
+
 //전역변수
 int frameCounter = 0;  // 프레임 카운터
 int count = 0;
@@ -105,7 +110,11 @@ int main(void) {
 
         //DrawTexture(frame, 0, 0, WHITE);  // 60개의 프레임 중 현재 프레임을 그리기
         //DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);    //프레임 이미지 그리기
-        if(isSpace == 1){
+        if(isSpace >= 1){
+            int randomNumber1;
+            int randomNumber2;
+            int randomNumber3;
+
             static int j = 1; // 캐릭터 인덱스 초기화
 
             // 프레임마다 j를 증가시킴
@@ -116,60 +125,94 @@ int main(void) {
                 j = 1;
             }
 
-            // 같은 위치에 계속 출력해서 문자만 바뀌는 효과를 줌
-            DrawText(TextFormat("%c", slot_A[j-1]), 332, 95, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 332, 115, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j]), 330, 135, 40, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 332, 160, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 332, 180, 30, AnA);
-        }
-        if(isSpace > 1){
-            int randomNumber = rand() % 100 + 1;
-
-            // 1% 확률로 'A' 출력
-            if (randomNumber == 1 && count > 30) {
-                DrawText("A", 330, 135, 40, AnA);
+            if(isSpace <= 1){
+                // 슬롯 첫번째
+                DrawText(TextFormat("%c", slot_A[j-1]), 332, 95, 30, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 332, 115, 30, AnA);
+                DrawText(TextFormat("%c", slot_A[j]), 330, 135, 40, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 332, 160, 30, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 332, 180, 30, AnA);
+                randomNumber1 = ran();
             }
-            else{
-                DrawText("B", 330, 135, 40, AnA);
-            }
-        }
-        if(isSpace == 2){
-            static int j = 1; // 캐릭터 인덱스 초기화
-
-            // 프레임마다 j를 증가시킴
-            j++;
-
-            // 문자열의 끝에 도달하면 다시 처음으로 돌아감
-            if (j >= 22) {
-                j = 1;
+            if(isSpace <=2){
+                // 슬롯 두번째
+                DrawText(TextFormat("%c", slot_n[j-1]), 390, 95, 30, AnA);
+                DrawText(TextFormat("%c", slot_n[j-1]), 390, 115, 30, AnA);
+                DrawText(TextFormat("%c", slot_n[j]), 388, 135, 40, AnA);
+                DrawText(TextFormat("%c", slot_n[j-1]), 390, 160, 30, AnA);
+                DrawText(TextFormat("%c", slot_n[j-1]), 390, 180, 30, AnA);
+                randomNumber2 = ran();
             }
 
-            // 같은 위치에 계속 출력해서 문자만 바뀌는 효과를 줌
-            DrawText(TextFormat("%c", slot_A[j-1]), 390, 95, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 390, 115, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j]), 388, 135, 40, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 390, 160, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 390, 180, 30, AnA);
-        }
-        if(isSpace == 3){
-            static int j = 1; // 캐릭터 인덱스 초기화
-
-            // 프레임마다 j를 증가시킴
-            j++;
-
-            // 문자열의 끝에 도달하면 다시 처음으로 돌아감
-            if (j >= 22) {
-                j = 1;
+            if(isSpace <= 3){
+                // 슬롯 세번째
+                DrawText(TextFormat("%c", slot_A[j-1]), 448, 95, 30, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 448, 115, 30, AnA);
+                DrawText(TextFormat("%c", slot_A[j]), 446, 135, 40, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 448, 160, 30, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 448, 180, 30, AnA);
+                randomNumber3 = ran();
             }
 
-            // 같은 위치에 계속 출력해서 문자만 바뀌는 효과를 줌
-            DrawText(TextFormat("%c", slot_A[j-1]), 448, 95, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 448, 115, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j]), 446, 135, 40, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 448, 160, 30, AnA);
-            DrawText(TextFormat("%c", slot_A[j-1]), 448, 180, 30, AnA);
+            //출력
+            if(isSpace > 1){
+                // 1% 확률로 'A' 출력
+                if (randomNumber1 == 99 && count > 30) {
+                    DrawText("A", 330, 135, 40, AnA);
+                }
+                else if(randomNumber1 <= 40){
+                    DrawText("N", 330, 135, 40, AnA);
+                }
+                else if(randomNumber1 <= 60){
+                    DrawText("C", 330, 135, 40, AnA);
+                }
+                else if(randomNumber1 <= 80){
+                    DrawText("B", 330, 135, 40, AnA);
+                }
+                else{
+                    DrawText("0", 330, 135, 40, AnA);
+                }
+            }
+            if(isSpace > 2){
+                // 1% 확률로 'A' 출력
+                if (randomNumber2 == 99 && count > 30) {
+                    DrawText("n", 388, 135, 40, AnA);
+                }
+                else if(randomNumber2 <= 40){
+                    DrawText("a", 388, 135, 40, AnA);
+                }
+                else if(randomNumber2 <= 60){
+                    DrawText("c", 388, 135, 40, AnA);
+                }
+                else if(randomNumber2 <= 80){
+                    DrawText("b", 388, 135, 40, AnA);
+                }
+                else{
+                    DrawText("0", 388, 135, 40, AnA);
+                }
+            }
+            if(isSpace > 3){
+                // 1% 확률로 'A' 출력
+                if (randomNumber3 == 99 && count > 30) {
+                    DrawText("A", 446, 135, 40, AnA);
+                }
+                else if(randomNumber3 <= 40){
+                    DrawText("N", 446, 135, 40, AnA);
+                }
+                else if(randomNumber3 <= 60){
+                    DrawText("C", 446, 135, 40, AnA);
+                }
+                else if(randomNumber3 <= 80){
+                    DrawText("B", 446, 135, 40, AnA);
+                }
+                else{
+                    DrawText("0", 446, 135, 40, AnA);
+                }
+
+            }
+
         }
+
         if(isSpace == 5){
             isSpace = 0;
             count += 1;
