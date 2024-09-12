@@ -1,7 +1,4 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/jeongjihyo/Documents/AnA_sunrin_festivities -B /Users/jeongjihyo/Documents/AnA_sunrin_festivities/cmake-build-debug
-CMake Error at CMakeLists.txt:15 (target_link_libraries):
-  Cannot specify link libraries for target "AnA_sunrin_festivities" which is
-  not built by this project.
-
-
--- Configuring incomplete, errors occurred!
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/jeongjihyo/Documents/AnA_sunrin_festivities/cmake-build-debug

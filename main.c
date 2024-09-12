@@ -11,6 +11,8 @@ void DrawBtn();    //슬롯 버튼 그리는 함수
 //전역변수
 int frameCounter = 0;  // 프레임 카운터
 
+char solot_A[24] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','X','T','U','V','W','G'};
+
 //버튼 클릭 여부
 int isClickbtn = 0;
 
@@ -35,7 +37,11 @@ int main(void) {
         sprintf(fileName, "img/A/A_frame%d.png", i);
         A_frame[i] = LoadTexture(fileName);  // 해당 파일을 텍스처로 로드
     }
-    Texture2D frame = LoadTexture("A_frame0.png");
+    Image image = LoadImage("img/A/A_frame0.png");     // Loaded in CPU memory (RAM)
+    Texture2D texture = LoadTextureFromImage(image);          // Image converted to texture, GPU memory (VRAM)
+    UnloadImage(image);   // Once image has been converted to texture and uploaded to VRAM, it can be unloaded from RAM
+
+    Texture2D frame = LoadTexture("img/A/A_frame0.png");
     // 창 크기 설정
     const int screenWidth = 800;
     const int screenHeight = 400;
@@ -76,8 +82,8 @@ int main(void) {
         DrawMachine();        // 슬롯머신 그리기
 
         EndMode3D();  // 3D 모드 비활성화
-        DrawTexture(frame, 0, 0, WHITE);  // 60개의 프레임 중 현재 프레임을 그리기
-
+        //DrawTexture(frame, 0, 0, WHITE);  // 60개의 프레임 중 현재 프레임을 그리기
+        DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
         DrawText("Use W/A/S/D and mouse to move the camera", 10, 10, 20, DARKGRAY);
         DrawText("Press ESC to exit", 10, 30, 20, DARKGRAY);
 

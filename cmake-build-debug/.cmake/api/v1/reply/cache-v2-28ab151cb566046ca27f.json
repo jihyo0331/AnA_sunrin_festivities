@@ -1638,6 +1638,18 @@
 			"value" : "/opt/homebrew/bin/pkg-config"
 		},
 		{
+			"name" : "Raylib_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Raylib."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/opt/homebrew/lib/cmake/raylib"
+		},
+		{
 			"name" : "__pkg_config_arguments_PC_RAYLIB",
 			"properties" : 
 			[

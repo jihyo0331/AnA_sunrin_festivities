@@ -235,6 +235,9 @@ PKG_CONFIG_ARGN:STRING=
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/opt/homebrew/bin/pkg-config
 
+//The directory containing a CMake configuration file for Raylib.
+Raylib_DIR:PATH=/opt/homebrew/lib/cmake/raylib
+
 //Value Computed by CMake
 examples_BINARY_DIR:STATIC=/Users/jeongjihyo/Documents/AnA_sunrin_festivities/cmake-build-debug
 
