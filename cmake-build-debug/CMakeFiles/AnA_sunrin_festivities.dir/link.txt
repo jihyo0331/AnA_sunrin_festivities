@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/cc -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/AnA_sunrin_festivities.dir/main.c.o -o AnA_sunrin_festivities  /opt/homebrew/lib/libraylib.dylib -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo

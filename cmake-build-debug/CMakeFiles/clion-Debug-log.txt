@@ -1,4 +1,11 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/jeongjihyo/Documents/AnA_sunrin_festivities -B /Users/jeongjihyo/Documents/AnA_sunrin_festivities/cmake-build-debug
--- Configuring done (0.0s)
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /Users/yihyeseon/Documents/GitHub/AnA_sunrin_festivities -B /Users/yihyeseon/Documents/GitHub/AnA_sunrin_festivities/cmake-build-debug
+-- The C compiler identification is AppleClang 14.0.3.14030022
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Found raylib: /opt/homebrew/lib/libraylib.dylib
+-- Configuring done (0.6s)
 -- Generating done (0.0s)
--- Build files have been written to: /Users/jeongjihyo/Documents/AnA_sunrin_festivities/cmake-build-debug
+-- Build files have been written to: /Users/yihyeseon/Documents/GitHub/AnA_sunrin_festivities/cmake-build-debug

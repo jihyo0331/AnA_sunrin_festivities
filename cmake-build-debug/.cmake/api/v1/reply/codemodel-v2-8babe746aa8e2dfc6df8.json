@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "AnA_sunrin_festivities::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-AnA_sunrin_festivities-Debug-45a9d94b00a2a7d94d9d.json",
+					"jsonFile" : "target-AnA_sunrin_festivities-Debug-8aed897174e7179c8e7d.json",
 					"name" : "AnA_sunrin_festivities",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/jeongjihyo/Documents/AnA_sunrin_festivities/cmake-build-debug",
-		"source" : "/Users/jeongjihyo/Documents/AnA_sunrin_festivities"
+		"build" : "/Users/yihyeseon/Documents/GitHub/AnA_sunrin_festivities/cmake-build-debug",
+		"source" : "/Users/yihyeseon/Documents/GitHub/AnA_sunrin_festivities"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 6
+		"minor" : 7
 	}
 }

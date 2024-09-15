@@ -11,14 +11,11 @@
 		"commands" : 
 		[
 			"add_executable",
-			"target_link_libraries",
-			"set_target_properties",
-			"find_package"
+			"target_link_libraries"
 		],
 		"files" : 
 		[
-			"CMakeLists.txt",
-			"/opt/homebrew/lib/cmake/raylib/raylib-config.cmake"
+			"CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -42,22 +39,6 @@
 				"file" : 0,
 				"line" : 21,
 				"parent" : 0
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 14,
-				"parent" : 0
-			},
-			{
-				"file" : 1,
-				"parent" : 4
-			},
-			{
-				"command" : 2,
-				"file" : 1,
-				"line" : 63,
-				"parent" : 5
 			}
 		]
 	},
@@ -67,11 +48,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.0 -fcolor-diagnostics"
-				},
-				{
-					"backtrace" : 2,
-					"fragment" : "-I/opt/homebrew/Cellar/raylib/5.0/include"
+					"fragment" : "-g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics"
 				}
 			],
 			"includes" : 
@@ -79,7 +56,7 @@
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "/opt/homebrew/Cellar/raylib/5.0/include"
+					"path" : "/opt/homebrew/include"
 				}
 			],
 			"language" : "C",
@@ -112,7 +89,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/opt/homebrew/Cellar/raylib/5.0/lib/libraylib.dylib",
+				"fragment" : "/opt/homebrew/lib/libraylib.dylib",
 				"role" : "libraries"
 			},
 			{
@@ -133,11 +110,6 @@
 			{
 				"backtrace" : 3,
 				"fragment" : "-framework CoreVideo",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 6,
-				"fragment" : "-L/opt/homebrew/Cellar/raylib/5.0/lib -lraylib",
 				"role" : "libraries"
 			}
 		],

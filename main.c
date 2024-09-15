@@ -31,7 +31,7 @@ bool spacePressed = false; // 스페이스 키가 눌렸는지 확인
 double spacePressTime = 0.0; // 스페이스 키를 누른 시간을 기록
 
 
-
+int j = 1; // 캐릭터 인덱스 초기화
 //슬롯머신 애니메이션
 Texture2D A_frame[60];
 
@@ -62,7 +62,7 @@ int main(void) {
     InitWindow(screenWidth, screenHeight, "2024 AnA 선린제 슬롯머신");
 
     // 전체화면 모드로 전환
-    //SetWindowState(FLAG_FULLSCREEN_MODE);
+    SetWindowState(FLAG_FULLSCREEN_MODE);
 
     // 카메라 설정
     Camera camera = { 0 };
@@ -115,7 +115,7 @@ int main(void) {
             int randomNumber2;
             int randomNumber3;
 
-            static int j = 1; // 캐릭터 인덱스 초기화
+
 
             // 프레임마다 j를 증가시킴
             j++;
@@ -127,86 +127,91 @@ int main(void) {
 
             if(isSpace <= 1){
                 // 슬롯 첫번째
-                DrawText(TextFormat("%c", slot_A[j-1]), 332, 95, 30, AnA);
-                DrawText(TextFormat("%c", slot_A[j-1]), 332, 115, 30, AnA);
-                DrawText(TextFormat("%c", slot_A[j]), 330, 135, 40, AnA);
-                DrawText(TextFormat("%c", slot_A[j-1]), 332, 160, 30, AnA);
-                DrawText(TextFormat("%c", slot_A[j-1]), 332, 180, 30, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 765, 250, 90, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 760, 300, 90, AnA);
+                DrawText(TextFormat("%c", slot_A[j]), 755, 360, 100, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 760, 420, 90, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 765, 470, 90, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 770, 520, 90, AnA);
                 randomNumber1 = ran();
             }
             if(isSpace <=2){
                 // 슬롯 두번째
-                DrawText(TextFormat("%c", slot_n[j-1]), 390, 95, 30, AnA);
-                DrawText(TextFormat("%c", slot_n[j-1]), 390, 115, 30, AnA);
-                DrawText(TextFormat("%c", slot_n[j]), 388, 135, 40, AnA);
-                DrawText(TextFormat("%c", slot_n[j-1]), 390, 160, 30, AnA);
-                DrawText(TextFormat("%c", slot_n[j-1]), 390, 180, 30, AnA);
+                DrawText(TextFormat("%c", slot_n[j-1]), 925, 250, 90, AnA);
+                DrawText(TextFormat("%c", slot_n[j-1]), 925, 300, 90, AnA);
+                DrawText(TextFormat("%c", slot_n[j]), 925, 360, 100, AnA);
+                DrawText(TextFormat("%c", slot_n[j-1]), 925, 420, 90, AnA);
+                DrawText(TextFormat("%c", slot_n[j-1]), 925, 470, 90, AnA);
+                DrawText(TextFormat("%c", slot_n[j-1]), 925, 530, 90, AnA);
                 randomNumber2 = ran();
             }
 
             if(isSpace <= 3){
                 // 슬롯 세번째
-                DrawText(TextFormat("%c", slot_A[j-1]), 448, 95, 30, AnA);
-                DrawText(TextFormat("%c", slot_A[j-1]), 448, 115, 30, AnA);
-                DrawText(TextFormat("%c", slot_A[j]), 446, 135, 40, AnA);
-                DrawText(TextFormat("%c", slot_A[j-1]), 448, 160, 30, AnA);
-                DrawText(TextFormat("%c", slot_A[j-1]), 448, 180, 30, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 1090, 250, 90, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 1095, 300, 90, AnA);
+                DrawText(TextFormat("%c", slot_A[j]), 1100, 360, 100, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 1098, 420, 90, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 1093, 470, 90, AnA);
+                DrawText(TextFormat("%c", slot_A[j-1]), 1088, 520, 90, AnA);
                 randomNumber3 = ran();
             }
 
             //출력
             if(isSpace > 1){
                 // 1% 확률로 'A' 출력
-                if (randomNumber1 == 99 && count > 30) {
-                    DrawText("A", 330, 135, 40, AnA);
+                if (randomNumber1 == 99 ) {
+                    DrawText("A", 755, 360, 100, AnA);
                 }
-                else if(randomNumber1 <= 40){
-                    DrawText("N", 330, 135, 40, AnA);
+                else if(randomNumber1 <= 40 && randomNumber1 >0){
+                    DrawText("N", 755, 360, 100, AnA);
                 }
-                else if(randomNumber1 <= 60){
-                    DrawText("C", 330, 135, 40, AnA);
+                else if(randomNumber1 <= 60 && randomNumber1 < 80){
+                    DrawText("C", 755, 360, 100, AnA);
                 }
-                else if(randomNumber1 <= 80){
-                    DrawText("B", 330, 135, 40, AnA);
+
+                else if (randomNumber1 <= 80){
+                    DrawText("R", 755, 360, 100, AnA);
+
                 }
-                else{
-                    DrawText("0", 330, 135, 40, AnA);
+                else {
+                    DrawText("0", 755, 360, 100, AnA);
                 }
             }
             if(isSpace > 2){
-                // 1% 확률로 'A' 출력
-                if (randomNumber2 == 99 && count > 30) {
-                    DrawText("n", 388, 135, 40, AnA);
+
+                if (randomNumber2 <= 40 ) {
+                    DrawText("n", 925, 360, 100, AnA);
                 }
-                else if(randomNumber2 <= 40){
-                    DrawText("a", 388, 135, 40, AnA);
-                }
-                else if(randomNumber2 <= 60){
-                    DrawText("c", 388, 135, 40, AnA);
-                }
+                // else if(randomNumber2 <= 40){
+                //     DrawText("a", 925, 360, 100, AnA);
+                // }
+                // else if(randomNumber2 <= 60 && randomNumber2 < 80){
+                //     DrawText("c", 925, 360, 100, AnA);
+                // }
                 else if(randomNumber2 <= 80){
-                    DrawText("b", 388, 135, 40, AnA);
+                    DrawText("b", 925, 360, 100, AnA);
                 }
                 else{
-                    DrawText("0", 388, 135, 40, AnA);
+                    DrawText("0", 925, 360, 100, AnA);
                 }
             }
             if(isSpace > 3){
                 // 1% 확률로 'A' 출력
-                if (randomNumber3 == 99 && count > 30) {
-                    DrawText("A", 446, 135, 40, AnA);
+                if (randomNumber3 <= 40) {
+                    DrawText("A", 1100, 360, 100, AnA);
                 }
-                else if(randomNumber3 <= 40){
-                    DrawText("N", 446, 135, 40, AnA);
+                else if(randomNumber3 > 40 && randomNumber3 <= 60){
+                    DrawText("B", 1100, 360, 100, AnA);
                 }
-                else if(randomNumber3 <= 60){
-                    DrawText("C", 446, 135, 40, AnA);
-                }
-                else if(randomNumber3 <= 80){
-                    DrawText("B", 446, 135, 40, AnA);
-                }
+                 else if(randomNumber3 <= 80){
+                     DrawText("C", 1100, 360, 100, AnA);
+                 }
+                // else if(randomNumber3 <= 80){
+                //     DrawText("B", 1100, 360, 100, AnA);
+                // }
                 else{
-                    DrawText("0", 446, 135, 40, AnA);
+                    DrawText("0", 1100, 360, 100, AnA);
                 }
 
             }
@@ -218,7 +223,7 @@ int main(void) {
             count += 1;
         }
 
-        DrawText("Press ESC to exit", 10, 30, 20, DARKGRAY);
+        DrawText("made by C", 10, 10, 30, DARKGRAY);
         //DrawText(solot_A[0],10,20,30,DARKGRAY);
 
 
