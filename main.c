@@ -10,9 +10,22 @@ void DrawMachine();  // 슬롯머신 그리는 함수
 void DrawCly();    // 슬롯 원통 그리는 함수
 void DrawBtn();    //슬롯 버튼 그리는 함수
 void DrawChar(int a);
+int randC1 = 0;
+int randC2 = 0;
+int randc = 0;
+
+int getRandomNumber() {
+    // 랜덤 시드 초기화 (한 번만 수행)
+    srand(time(NULL));
+
+    // 97부터 122까지의 수를 반환 (122 - 97 + 1 = 26)
+    return (rand() % 26) + 97;
+}
+
 
 int ran(){
     int randomNumber = rand() % 100 + 1;
+
     return randomNumber;
 }
 
@@ -21,7 +34,6 @@ int frameCounter = 0;  // 프레임 카운터
 int count = 0;
 
 char slot_A[24] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','X','T','U','V','W','Z'};
-char* slot_Ap = slot_A;
 char slot_n[24] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','x','t','u','v','w','z'};
 
 //버튼 클릭 여부
@@ -183,12 +195,12 @@ int main(void) {
                 if (randomNumber2 <= 40 ) {
                     DrawText("n", 925, 360, 100, AnA);
                 }
-                // else if(randomNumber2 <= 40){
-                //     DrawText("a", 925, 360, 100, AnA);
-                // }
-                // else if(randomNumber2 <= 60 && randomNumber2 < 80){
-                //     DrawText("c", 925, 360, 100, AnA);
-                // }
+                 else if(randomNumber2 <= 40){
+                     DrawText("a", 925, 360, 100, AnA);
+                 }
+                 else if(randomNumber2 <= 60 && randomNumber2 < 80){
+                     DrawText("c", 925, 360, 100, AnA);
+                 }
                 else if(randomNumber2 <= 80){
                     DrawText("b", 925, 360, 100, AnA);
                 }
@@ -207,9 +219,9 @@ int main(void) {
                  else if(randomNumber3 <= 80){
                      DrawText("C", 1100, 360, 100, AnA);
                  }
-                // else if(randomNumber3 <= 80){
-                //     DrawText("B", 1100, 360, 100, AnA);
-                // }
+                 else if(randomNumber3 <= 80){
+                     DrawText("B", 1100, 360, 100, AnA);
+                 }
                 else{
                     DrawText("0", 1100, 360, 100, AnA);
                 }
